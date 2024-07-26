@@ -3,7 +3,7 @@ import NavService from "./NavSubComponents/NavService";
 
 export default function Navbar() {
   return (
-    <div className="w-52 h-screen bg-gray-800 text-white p-4 fixed">
+    <div className="w-52 h-screen bg-gray-800 text-white p-4 fixed z-10">
       <div>
         <div href="/" className="block p-2 hover:bg-gray-700 rounded">
           Home

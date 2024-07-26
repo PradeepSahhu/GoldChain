@@ -3,8 +3,10 @@ import Animation from "../Animation/Animation";
 
 export default function Homescreen() {
   return (
-    <div className="flex justify-start">
-      <p className="text-[5rem] text-gray-600">Welcome to Goldchain</p>
+    <div className="flex justify-start font-myFont">
+      <div className="inline-grid items-center">
+        <p className="text-[5rem] text-gray-600 ">Welcome to Goldchain</p>
+      </div>
       <div className="flex justify-end">
         <Animation
           url={
