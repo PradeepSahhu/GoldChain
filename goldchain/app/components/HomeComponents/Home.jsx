@@ -6,6 +6,10 @@ export default function Homescreen() {
     <div className="flex justify-start font-myFont">
       <div className="inline-grid items-center">
         <p className="text-[5rem] text-gray-600 ">Welcome to Goldchain</p>
+        <p className="font-extralight">
+          {" "}
+          One way solution to all the supply chain management
+        </p>
       </div>
       <div className="flex justify-end">
         <Animation

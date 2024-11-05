@@ -1,7 +1,13 @@
+"use client";
 import Link from "next/link";
 import NavService from "./NavSubComponents/NavService";
+import connectToContract from "@/ContractConnection/connectToContract";
 
 export default function Navbar() {
+  async function connectContract() {
+    const contract = await connectToContract();
+    console.table(contract);
+  }
   return (
     <div className="w-52 h-screen bg-gray-800 text-white p-4 fixed z-10">
       <div>
@@ -33,6 +39,14 @@ export default function Navbar() {
         <div href="/contact" className="block p-2 hover:bg-gray-700 rounded">
           Contact
         </div>
+      </div>
+      <div>
+        <button
+          className="bg-gradient-to-r from-green-500 to-indigo-600  m-5 px-5 py-2 text-white rounded-xl shadow-2xl shadow-black"
+          onClick={() => connectContract()}
+        >
+          Connect
+        </button>
       </div>
     </div>
   );
