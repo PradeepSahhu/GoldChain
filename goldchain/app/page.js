@@ -85,12 +85,14 @@ export default function Home() {
               placeholder="Enter Aadhaar Number"
             />
           </div>
-          <button
-            className="px-5 py-2 rounded-xl bg-yellow-400"
-            onClick={() => getDetails()}
-          >
-            Get Details
-          </button>
+          <div className="flex justify-center my-10">
+            <button
+              className="px-5 py-2 rounded-xl bg-gray-800 hover:scale-95 transition-all duration-300 hover:bg-gradient-to-r hover:from-slate-800 hover:to-rose-800"
+              onClick={() => getDetails()}
+            >
+              submit
+            </button>
+          </div>
         </div>
       </div>
     </div>
