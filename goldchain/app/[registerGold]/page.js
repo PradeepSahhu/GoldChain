@@ -1,3 +1,3 @@
 export default function RegisterGold() {
-  return <div>Register Your gold</div>;
+  return <div className="bg-blue-400">Register Your gold</div>;
 }

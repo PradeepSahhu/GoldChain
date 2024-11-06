@@ -26,12 +26,12 @@ export default function Navbar() {
             Services
           </div>
           <div className="hidden group-hover:block absolute left-[6rem] -top-20 mt-2 w-48 bg-blue-600 text-white shadow-lg rounded-xl">
-            <NavService name={"Service 1"} />
-            <NavService name={"Service 2"} />
-            <NavService name={"Service 3"} />
-            <NavService name={"Service 4"} />
-            <NavService name={"Service 5"} />
-            <NavService name={"Service 6"} />
+            <NavService name={"Register Gold"} navigate={""} />
+            <NavService name={"Find Gold"} navigate={"SearchGold"} />
+            <NavService name={"Service 3"} navigate={""} />
+            <NavService name={"Service 4"} navigate={""} />
+            <NavService name={"Service 5"} navigate={""} />
+            <NavService name={"Service 6"} navigate={""} />
           </div>
         </div>
       </div>
