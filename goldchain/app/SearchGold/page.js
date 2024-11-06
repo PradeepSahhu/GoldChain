@@ -51,7 +51,52 @@ export default function SearchGold() {
         </div>
       </div>
 
-      <div></div>
+      <div>
+        <table className="table-auto w-full mt-10">
+          <thead>
+            <tr className="text-white bg-darkblue rounded-lg">
+              <th className="px-4 py-4 text-start font-normal">S.no</th>
+              <th className="px-4 py-4 text-start font-normal">Name</th>
+              <th className="px-4 py-4 font-normal">Friend Address</th>
+              <th className="px-4 py-4 font-normal">age</th>
+              <th className="px-4 py-4 font-normal">Message</th>
+              <th className="px-4 py-4 font-normal">Added Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr key={1} className="border-b border-b-darkblue">
+              <td className="px-4 py-6 text-center text-white">{1}</td>
+
+              <td className="px-4 py-6 text-center text-white">
+                {"Pradeep Sahu"}
+              </td>
+              <td className={`px-4 py-6 text-center `}>{"Ox12121212121212"}</td>
+              <td className="px-4 py-6 text-center text-white">{12}</td>
+              <td className={`px-4 py-6 text-center `}>{"No need"}</td>
+              <td className={`px-4 py-6 text-center `}>{12 - 12 - 2002}</td>
+            </tr>
+            {/* {friendList.map((eachFriend, i) => (
+              <tr key={i} className="border-b border-b-darkblue">
+                <td className="px-4 py-6 text-center text-white">{i + 1}</td>
+
+                <td className="px-4 py-6 text-center text-white">
+                  {eachFriend.name}
+                </td>
+                <td className={`px-4 py-6 text-center `}>
+                  {eachFriend.friendAddress}
+                </td>
+                <td className="px-4 py-6 text-center text-white">
+                  {parseInt(eachFriend.age)}
+                </td>
+                <td className={`px-4 py-6 text-center `}>
+                  {eachFriend.message}
+                </td>
+                <td className={`px-4 py-6 text-center `}>{eachFriend.date}</td>
+              </tr>
+            ))} */}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
