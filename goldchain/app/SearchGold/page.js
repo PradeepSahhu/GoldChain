@@ -1,4 +1,66 @@
+"use client";
+import { useState } from "react";
+import connectToContract from "@/ContractConnection/connectToContract";
+
 export default function SearchGold() {
+  const [userInputs, setUserInputs] = useState({
+    aadhaarNumber: "",
+    goldHUID: "",
+  });
+
+  const [userData, setUserData] = useState();
+
+  const [userList, setUserList] = useState();
+  const searchGoldRecords = async () => {
+    setUserData(null);
+
+    console.table([userInputs]);
+    try {
+      const contract = await connectToContract();
+      if (userInputs.aadhaarNumber.trim() === "") {
+        console.log("aadhaar number is empty");
+        const response = await contract.isRecordByHUID(
+          parseInt(userInputs.goldHUID)
+        );
+        console.log(response);
+        setUserData(response);
+        console.log("user data is : ", userData);
+      } else {
+        console.log("gold number is empty");
+        const response = await contract.isRecordByAadhaar(
+          userInputs.aadhaarNumber
+        );
+        console.log(response);
+        setUserData(response);
+        console.log("user data is : ", userData);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getAllRecords = async () => {
+    try {
+      const contract = await connectToContract();
+
+      if (userInputs.aadhaarNumber.trim() !== "") {
+        const res = await contract.getAllRecordsForAadhaar(
+          userInputs.aadhaarNumber
+        );
+        setUserList(res);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleInputChange = async (e) => {
+    const { name, value } = e.target;
+    setUserInputs((prevInputs) => ({
+      ...prevInputs,
+      [name]: value,
+    }));
+  };
   return (
     <div className="">
       <div className="absolute w-full flex justify-center -z-10">
@@ -24,8 +86,10 @@ export default function SearchGold() {
               <input
                 id="inputField"
                 type="text"
+                name="aadhaarNumber"
                 className="border border-gray-300 rounded-xl p-2 text-center w-64 text-black"
                 placeholder="Enter Buyer Name"
+                onChange={handleInputChange}
               />
             </div>
             <div className="text-white mx-[10rem] flex items-center">
@@ -38,65 +102,106 @@ export default function SearchGold() {
               <input
                 id="inputField"
                 type="number"
+                name="goldHUID"
                 className="border border-gray-300 rounded-xl p-2 text-center w-64 text-black"
                 placeholder="Enter HUID Number"
+                onChange={handleInputChange}
               />
             </div>
           </div>
           <div className="flex justify-center mt-[5rem]">
-            <button className="px-5 py-2 bg-gray-700 rounded-xl ">
+            <button
+              className="px-5 py-2 bg-gray-700 rounded-xl "
+              onClick={searchGoldRecords}
+            >
               Check from Records
             </button>
           </div>
         </div>
       </div>
 
-      <div>
-        <table className="table-auto w-full mt-10">
+      {userData && (
+        <div>
+          <table className="table-auto w-full mt-10">
+            <thead>
+              <tr className="text-white bg-darkblue rounded-lg">
+                <th className="px-4 py-4 text-start font-normal">S.no</th>
+                <th className="px-4 py-4 text-start font-normal">Buyer Name</th>
+                <th className="px-4 py-4 font-normal">Aadhaar Number</th>
+                <th className="px-4 py-4 font-normal">Gold HUID</th>
+                <th className="px-4 py-4 font-normal">Date</th>
+                <th className="px-4 py-4 font-normal">
+                  {" "}
+                  Additional Information
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr key={1} className="border-b border-b-darkblue">
+                <td className="px-4 py-6 text-center text-white">{1}</td>
+
+                <td className="px-4 py-6 text-center text-white">
+                  {userData[0]}
+                </td>
+                <td className={`px-4 py-6 text-center `}>{userData[1]}</td>
+                <td className="px-4 py-6 text-center text-white">
+                  {parseInt(userData[3])}
+                </td>
+                <td className={`px-4 py-6 text-center `}>{userData[2]}</td>
+                <td className={`px-4 py-6 text-center `}>
+                  {parseInt(userData[4])}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div className="flex justify-center">
+            <button
+              className="px-8 py-3 bg-gray-600 rounded-xl my-5 bg-gradient-to-r hover:from-gray-500 hover:to-cyan-500"
+              onClick={getAllRecords}
+            >
+              Show Complete from this Aadhaar Card
+            </button>
+          </div>
+        </div>
+      )}
+
+      {userList && (
+        <table className="table-auto w-full my-10">
           <thead>
             <tr className="text-white bg-darkblue rounded-lg">
               <th className="px-4 py-4 text-start font-normal">S.no</th>
-              <th className="px-4 py-4 text-start font-normal">Name</th>
-              <th className="px-4 py-4 font-normal">Friend Address</th>
-              <th className="px-4 py-4 font-normal">age</th>
-              <th className="px-4 py-4 font-normal">Message</th>
-              <th className="px-4 py-4 font-normal">Added Date</th>
+              <th className="px-4 py-4 text-start font-normal">Buyer Name</th>
+              <th className="px-4 py-4 font-normal">Aadhaar Number</th>
+              <th className="px-4 py-4 font-normal">Gold HUID</th>
+              <th className="px-4 py-4 font-normal">Date</th>
+              <th className="px-4 py-4 font-normal"> Additional Information</th>
             </tr>
           </thead>
           <tbody>
-            <tr key={1} className="border-b border-b-darkblue">
-              <td className="px-4 py-6 text-center text-white">{1}</td>
-
-              <td className="px-4 py-6 text-center text-white">
-                {"Pradeep Sahu"}
-              </td>
-              <td className={`px-4 py-6 text-center `}>{"Ox12121212121212"}</td>
-              <td className="px-4 py-6 text-center text-white">{12}</td>
-              <td className={`px-4 py-6 text-center `}>{"No need"}</td>
-              <td className={`px-4 py-6 text-center `}>{12 - 12 - 2002}</td>
-            </tr>
-            {/* {friendList.map((eachFriend, i) => (
+            {userList.map((eachUser, i) => (
               <tr key={i} className="border-b border-b-darkblue">
                 <td className="px-4 py-6 text-center text-white">{i + 1}</td>
 
                 <td className="px-4 py-6 text-center text-white">
-                  {eachFriend.name}
+                  {eachUser.buyerName}
                 </td>
                 <td className={`px-4 py-6 text-center `}>
-                  {eachFriend.friendAddress}
+                  {eachUser.aadhaarNumber}
                 </td>
                 <td className="px-4 py-6 text-center text-white">
-                  {parseInt(eachFriend.age)}
+                  {parseInt(eachUser.goldHUID)}
                 </td>
                 <td className={`px-4 py-6 text-center `}>
-                  {eachFriend.message}
+                  {parseInt(eachUser.date)}
                 </td>
-                <td className={`px-4 py-6 text-center `}>{eachFriend.date}</td>
+                <td className={`px-4 py-6 text-center `}>
+                  {eachUser.goldInfo}
+                </td>
               </tr>
-            ))} */}
+            ))}
           </tbody>
         </table>
-      </div>
+      )}
     </div>
   );
 }
