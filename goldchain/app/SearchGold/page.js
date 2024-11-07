@@ -147,10 +147,8 @@ export default function SearchGold() {
                 <td className="px-4 py-6 text-center text-white">
                   {parseInt(userData[3])}
                 </td>
+                <td className={`px-4 py-6 text-center `}>{userData[4]}</td>
                 <td className={`px-4 py-6 text-center `}>{userData[2]}</td>
-                <td className={`px-4 py-6 text-center `}>
-                  {parseInt(userData[4])}
-                </td>
               </tr>
             </tbody>
           </table>
